@@ -27,13 +27,13 @@
 				$code = "https://www.youtube.com/embed/".$arr2[0];
 			}
 			else{
-				echo "else";
+				// echo "else";
 				$arr1 = explode("embed", $txtLink);
 				if (in_array("https://www.youtube.com/", $arr1)) {
 					$code = $txtLink;
 				}
 				else{
-					echo "Link lỗi!";
+					// echo "Link lỗi!";
 					$code = "Error";
 				}
 			}
@@ -142,13 +142,13 @@
 		return $id_khoa_hoc_moi_nhat;
 	}
 
-	function insertKhoa_hoc($connect, $ten_khoa_hoc, $ten_tac_gia, $thumbnail, $tags, $mo_ta){
-		$SQL = "INSERT INTO khoa_hoc (ten_khoa_hoc, ten_tac_gia, thumbnail, tags, mo_ta) VALUES('".$ten_khoa_hoc."', '".$ten_tac_gia."', '".$thumbnail."', '".$tags."', '".$mo_ta."')";
+	function insertKhoa_hoc($connect, $ten_khoa_hoc, $ten_tac_gia, $thumbnail, $mo_ta, $thoi_gian, $gia){
+		$SQL = "INSERT INTO khoa_hoc (ten_khoa_hoc, ten_tac_gia, thumbnail, mo_ta, ngay_tao, gia) VALUES('".$ten_khoa_hoc."', '".$ten_tac_gia."', '".$thumbnail."', '".$mo_ta."', '".$thoi_gian."', '".$gia."')";
 		$Query = mysqli_query($connect, $SQL);
 	}
 
-	function updateKhoa_hoc($connect, $ten_khoa_hoc, $ten_tac_gia, $thumbnail, $id_khoa_hoc, $tags, $mo_ta){
-		$SQL = "UPDATE khoa_hoc SET ten_khoa_hoc = '".$ten_khoa_hoc."', ten_tac_gia = '".$ten_tac_gia."', thumbnail = '".$thumbnail."', tags = '".$tags."', mo_ta = '".$mo_ta."' WHERE id_khoa_hoc =".$id_khoa_hoc;
+	function updateKhoa_hoc($connect, $ten_khoa_hoc, $ten_tac_gia, $thumbnail, $id_khoa_hoc, $mo_ta, $gia){
+		$SQL = "UPDATE khoa_hoc SET ten_khoa_hoc = '".$ten_khoa_hoc."', ten_tac_gia = '".$ten_tac_gia."', thumbnail = '".$thumbnail."', mo_ta = '".$mo_ta."', gia = '".$gia."' WHERE id_khoa_hoc =".$id_khoa_hoc;
 		$Query = mysqli_query($connect, $SQL);
 	}
 
