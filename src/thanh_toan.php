@@ -1,4 +1,5 @@
 <?php
+    date_default_timezone_set('Asia/Ho_Chi_Minh');  
     include '../connectdb.php';
     include '../function.php';
 
@@ -61,12 +62,12 @@
             // $gia = 1000000;
             $qr = "https://qr.sepay.vn/img?acc=67893158888&bank=TPBank&amount=".$giaKH."&des=".$noidung;
             echo "<img src='".$qr."' title='Ngân hàng TPBank, STK: 6789.315.8888, Chủ tài khoản: Doãn Việt Anh'/>";
-            echo "<br><br>Ngân hàng: Tiên Phong Bank<br>Số tài khoản 6789 315 8888<br>Chủ tài khoản: Doãn Việt Anh<br>Số tiền: ".$giaKH."đ<br>Nội dung: ".$noidung;
+            echo "<br><br>Ngân hàng: Tiên Phong Bank<br>Số tài khoản 6789 315 8888<br>Chủ tài khoản: Doãn Việt Anh<br>Số tiền: ".number_format($giaKH)."đ<br>Nội dung: ".$noidung;
         ?>
         </div>
         <div class="boxx1">
             <form class="needs-validation" name="frmthanhtoan" method="post"
-            action="#">
+            action="">
             <input type="hidden" name="kh_tendangnhap" value="dnpcuong">
 
             <div class="py-5 text-center">
@@ -78,6 +79,8 @@
                 <div class="col-md-4 order-md-2 mb-4">
                     <h4 class="d-flex justify-content-between align-items-center mb-3">
                         <span class="text-muted">Giỏ hàng</span>
+                        <br>
+                        <br>
                         <span class="badge badge-secondary badge-pill"></span>
                     </h4>
                     <ul class="list-group mb-3">
@@ -86,9 +89,12 @@
                         <input type="hidden" name="sanphamgiohang[1][soluong]" value="2">
 
                         <li class="list-group-item d-flex justify-content-between lh-condensed">
-                            <div>
-                                <h5 class="my-0">khóa học c++</h5>
-                                <small class="text-muted">giáo viên:Nguyễn Văn A</small>
+                            <div style="width: 500px;">
+                                <h5 class="my-0">Tên khóa học: <?php echo $tenKH  ?></h5>
+                                <br>
+                                <h5 class="my-0">Người hướng dẫn: <?php echo $tenNHD  ?></h5>
+                                <!-- <p>Người hướng dẫn: <?php echo $tenNHD  ?></p> -->
+                                <!-- <small class="text-muted"></small> -->
                             </div>
                             <span class="text-muted"></span>
                         </li>
@@ -116,6 +122,25 @@
             </div>
 
         </form>
+        <?php
+            $dtime_start = date('Y-m-d H:i:s');
+            if(isset($_POST['btnDatHang'])){
+                $SQL = "SELECT username FROM khoa_hoc_da_mua WHERE id_khoa_hoc =".$id_khoa_hoc." AND username = '".$username."'"; 
+                if(mysqli_num_rows(mysqli_query($connect, $SQL)) > 0){
+                    echo "Bạn đã mua khóa học này rồi!";
+                }
+                else{
+                    $SQL = "INSERT INTO khoa_hoc_da_mua (username, id_khoa_hoc, ngay_mua) VALUES ('".$username."', $id_khoa_hoc, '".$dtime_start."')";
+                    if(!mysqli_query($connect, $SQL)){
+                        echo "Mua không thành công, vui lòng thử lại!";
+                    }
+                    else{
+                        echo "Mua hàng thành công!";
+                    }
+                }
+                
+            }
+        ?>
         </div>
         
         

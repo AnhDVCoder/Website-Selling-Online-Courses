@@ -203,8 +203,9 @@ if (!isset($_SESSION['fullname'])) {
 			insertKhoa_hoc($connect, $ten_khoa_hoc, $ten_tac_gia, $thumbnail_path, $mo_ta);
 			if($flag4 == true){
 				foreach ($categories as $value) {
-				$Query = mysqli_query($connect, "INSERT INTO khoa_hoc_phan_loai (ID_khoa_hoc, ID_phan_loai) VALUES('".$id_khoa_hoc."', '".$value."')");
+				$Query = mysqli_query($connect, "INSERT INTO khoa_hoc_phan_loai (ID_khoa_hoc, ID_phan_loai) VALUES(".$id_khoa_hoc.", ".$value.")");
 				}
+				// print_r($categories);
 			}
 			if (!file_exists("../khoa_hoc/".$id_khoa_hoc)) {
     				mkdir("../khoa_hoc/".$id_khoa_hoc, 0777, true);

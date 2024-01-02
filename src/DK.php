@@ -82,9 +82,25 @@ if(isset($_POST['DangKy'])){
     if (!mysqli_query($connect, $sql)) {
       echo "Thêm vào bảng thất bại!";
     }
+    else{
+      header("location: DN.php");
+      echo "
+            <script>
+                function myFunction() {
+                alert('Đăng ký thành công!');
+                }
+            </script>
+            <body onload='myFunction()'></body>";
+
+    }
   }
 }
 ?>
+<script type="text/javascript">
+    function test() {
+        alert("Test");
+    }
+</script>
 
 <body>
   <div class="login">

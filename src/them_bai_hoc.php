@@ -94,7 +94,8 @@ if (!isset($_SESSION['fullname'])) {
 
 			<div class="mb-3">
 			  <label for="file_de_bai" class="form-label">Nội dung</label>
-			  <input type="text" class="form-control" id="editor" name="editor">
+			  <!-- <input type="text" class="form-control" id="editor" name="editor"> -->
+			  <textarea id="editor" name="editor"></textarea>
 			</div>
 
 			
@@ -133,15 +134,23 @@ if (!isset($_SESSION['fullname'])) {
 			if ($_POST['video'] == "link") {
 				$video_type = "link";
 				if ($_POST['linkYT'] == "") {
-					// $kq.= "- Bạn chưa nhập link!<br>";
-					$flag2 = true;
+					$kq.= "- Bạn chưa nhập link!<br>";
+					$flag2 = false;
 				}
 				else{
 					$txtLink = $_POST['linkYT'];
-					$video_path = LinktoEmbed($txtLink);
-					$flag2 = true;
-					
+					if(LinktoEmbed($txtLink) == "Error"){
+						$kq.= "- Link không đúng định dạng youtube!<br>";
+						$flag2 = false;
+					}
+					else{
+						// $txtLink = $_POST['linkYT'];
+						$video_path = LinktoEmbed($txtLink);
+						$flag2 = true;
+					}
+
 				}
+				
 
 			}
 			elseif ($_POST['video'] == "upload"){

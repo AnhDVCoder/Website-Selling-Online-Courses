@@ -197,22 +197,22 @@ if (!isset($_SESSION['fullname'])) {
                                                 <br>
                                                 <p style='color:gray'><i class='fa fa-eye' aria-hidden='true'></i> ".$listKH['luot_xem']." Lượt xem</p>
                                                 <br>
-                                                <a href='";
+                                                <a class='button' href='";
                                                 if (mysqli_num_rows(mysqli_query($connect, $SQL)) > 0) {
                                                     echo "chi_tiet_khoa_hoc";
                                                 }
                                                 else{
                                                     echo "mo_ta";
                                                 };
-                                                echo ".php?id_khoa_hoc=".$listKH['id_khoa_hoc']."'> 
-                                                    <p><button class='button' id='btn1'>";
+                                                echo ".php?id_khoa_hoc=".$listKH['id_khoa_hoc']."'>
+                                                    <p>";
                                                 if (mysqli_num_rows(mysqli_query($connect, $SQL)) > 0) {
                                                     echo "Vào học";
                                                 }
                                                 else{
                                                     echo "Vào xem";
                                                 };   
-                                                    echo "</button></p>
+                                                echo "</p>
                                                 </a>
                                             </div>
                                         ";

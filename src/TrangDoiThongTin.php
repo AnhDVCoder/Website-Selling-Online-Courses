@@ -104,6 +104,9 @@ if ($_SESSION['username']) {
 							$kq = "Đổi tên thành công";
 							$_SESSION['fullname'] = $fullname;
 						}
+						else{
+							$kq .= "Bạn chưa điền tên!";
+						}
 					}
 					if(isset($_GET['changeGender'])){
 						$gender = $_GET['gender'];

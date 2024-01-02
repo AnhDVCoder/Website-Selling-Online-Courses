@@ -18,10 +18,16 @@
 ?>
 
 <?php
+	$SQL = "
+			SELECT *
+			FROM list_bai_hoc
+			WHERE ID_bai_hoc =".$id_bai_hoc;
+
+		$Query = mysqli_query($connect, $SQL);
 	$DLfromListBH = getDLfromlist_bai_hoc($connect, $id_bai_hoc);
 	if (mysqli_num_rows($DLfromListBH) > 0) {
 		$DLBH = mysqli_fetch_assoc($DLfromListBH);
-		$id_khoa_hoc_LBH = $DLBH['ID_khoa_hoc'];
+		// $id_khoa_hoc_LBH = $DLBH['ID_khoa_hoc'];
 		$ten_bai_hoc_LBH = $DLBH['Ten_bai_hoc'];
 		$video_type_LBH = $DLBH['video_type'];
 		$video_path_LBH = $DLBH['Video_path'];

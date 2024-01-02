@@ -39,8 +39,8 @@
 		<br>
 		<div class="box2">
 			<div id="xem_them" style="width: auto;">
-				<a href="them_khoa_hoc.php" class='btn-ql'>Thêm khóa học</a>
-				<a href="khoa_hoc.php" class='btn-ql'>Quay lại</a>
+				<a href="them_khoa_hoc.php" class='btn-ql' style="color: black;">Thêm khóa học</a>
+				<a href="khoa_hoc.php" class='btn-ql' style="color: black;">Quay lại</a>
 			</div>
 <div  class="box3" style="overflow-x:auto;">
 <table id="users">

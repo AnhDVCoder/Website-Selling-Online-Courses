@@ -22,7 +22,9 @@
         $list_DL_khoahoc = mysqli_fetch_assoc($DLKhoaHoc);
         $ten_khoa_hoc = $list_DL_khoahoc['ten_khoa_hoc'];
         $thumbnail_path = $list_DL_khoahoc['thumbnail'];
+        $tenNHD = $list_DL_khoahoc['ten_tac_gia'];
         $tags = $list_DL_khoahoc['tags'];
+        $giaKH = $list_DL_khoahoc['gia'];
         $mo_ta = $list_DL_khoahoc['mo_ta'];
     }
 
@@ -105,19 +107,21 @@
 				<a href="thanh_toan.php?id_khoa_hoc=<?php echo $id_khoa_hoc;?>"><button class="title"> Mua khóa học</button></a>
 				<ul class="list_bai_tap_item" id="scroll">
                     <div class="item-1">
-                        Tên Khóa học : Khóa học c++
+                        Tên Khóa học : <?php echo $ten_khoa_hoc  ?>
                     </div>
                     <div class="item-1">
-                        Tác giả : Doãn Việt Anh
+                        Tác giả : <?php echo $tenNHD  ?>
                     </div>
                     <div class="item-1">
-                       Giá tiền : 1.250.000 đ
+                       Giá tiền : <?php echo number_format($giaKH)." VNĐ"  ?>
                     </div>
                     <div class="item-1">
-                        tags: cơ bản
-                    </div>
-                    <div class="item-1">
-                        Số lượng bài học: 10
+                        Số lượng bài học: <?php  
+                        	$SQL = "SELECT COUNT(ID_bai_hoc) AS count FROM list_bai_hoc WHERE ID_khoa_hoc = ".$id_khoa_hoc;
+                        	$Query = mysqli_query($connect, $SQL);
+                        	$DLBH = mysqli_fetch_assoc($Query);
+                        	echo $DLBH['count'];
+                        ?>
                     </div>
                     <div class="item-1">
                        chúc bạn học vui vẻ !!!

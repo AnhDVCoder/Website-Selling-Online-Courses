@@ -40,8 +40,8 @@
 		<div class="box2">
 			<br>
 			<div id="xem_them" style="width: auto;">
-				<a href="them_bai_hoc.php?id_khoa_hoc=<?php echo $id_khoa_hoc ?>" class='btn-ql'>Thêm bài học</a>
-				<a href="quan_ly_khoa_hoc.php" class='btn-ql'>Quay lại</a>
+				<a href="them_bai_hoc.php?id_khoa_hoc=<?php echo $id_khoa_hoc ?>" class='btn-ql' style="color: black;">Thêm bài học</a>
+				<a href="quan_ly_khoa_hoc.php" class='btn-ql' style="color: black;">Quay lại</a>
 			</div>
 <div  class="box3" style="overflow-x:auto;">
 <table id="users">
