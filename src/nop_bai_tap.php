@@ -1,4 +1,6 @@
 <?php
+	date_default_timezone_set('Asia/Ho_Chi_Minh');  
+
 	include '../connectdb.php';
 	include '../function.php';
 	session_start();
@@ -18,20 +20,31 @@
 ?>
 
 <?php
-	$SQL = "
-			SELECT *
-			FROM list_bai_hoc
-			WHERE ID_bai_hoc =".$id_bai_hoc;
-
-		$Query = mysqli_query($connect, $SQL);
 	$DLfromListBH = getDLfromlist_bai_hoc($connect, $id_bai_hoc);
 	if (mysqli_num_rows($DLfromListBH) > 0) {
 		$DLBH = mysqli_fetch_assoc($DLfromListBH);
-		// $id_khoa_hoc_LBH = $DLBH['ID_khoa_hoc'];
+		$id_khoa_hoc_LBH = $DLBH['ID_khoa_hoc'];
 		$ten_bai_hoc_LBH = $DLBH['Ten_bai_hoc'];
 		$video_type_LBH = $DLBH['video_type'];
 		$video_path_LBH = $DLBH['Video_path'];
 		$de_bai_path_LBH = $DLBH['De_bai_path'];
+		$noi_dung_LBH = $DLBH['noi_dung'];
+	}
+
+	$SQL = "
+			SELECT *
+			FROM bai_hoc_da_nop
+			WHERE id_bai_hoc = ".$id_bai_hoc." AND username = '".$username."'";
+
+	$Query = mysqli_query($connect, $SQL);
+	if (mysqli_num_rows($Query) > 0) {
+		$DL = mysqli_fetch_assoc($Query);
+		$thoi_gian_nop_DLNB = $DL['thoi_gian_nop'];
+		$bai_nop_path_DLNB = $DL['bai_nop_path'];
+	}
+	else{
+		$thoi_gian_nop_DLNB = "";
+		$bai_nop_path_DLNB = "";
 	}
 
 	
@@ -94,15 +107,22 @@
 			<div class="mb-3">
 				<label for="video" class="form-label">Bài tập được làm trong cùng 1 file có điền số bài </label><br>
                 <h2>Nộp bài tập tại đây </h2>
-			  <label for="file_de_bai" class="form-label">Chọn file đề bài</label>
-			  <input type="file" class="form-control" id="file_de_bai" name="file_de_bai" value="hehe">
+			  <label for="file_de_bai" class="form-label">Chọn file bài tập 
+			  	<?php 
+			  		if($bai_nop_path_DLNB != ""){ 
+			  			echo "
+			  				<a href='".$bai_nop_path_DLNB."'>Bài tập đã nộp</a> 
+			  				<p>Thời gian: ".$thoi_gian_nop_DLNB."</p>";
+			  			};
+			  		?></label>
+			  <input type="file" class="form-control" id="file_de_bai" name="file_bai_nop" value="hehe">
 
 				
 			</div>
 
 
 			<input type="submit" class="btn btn-primary" name="saveBaiTap" value="Lưu">
-			<a href="quan_ly_bai_hoc.php?id_khoa_hoc=<?php echo $id_khoa_hoc_LBH ?>" class="btn btn-primary">Trở lại</a>
+			<a href="chi_tiet_khoa_hoc.php?id_khoa_hoc=<?php echo $id_khoa_hoc_LBH ?>&id_bai_hoc=<?php echo $id_bai_hoc ?>" class="btn btn-primary">Trở lại</a>
 
 <?php
 	$kq = "<br>";
@@ -114,29 +134,46 @@
 	// 	$id_bai_hoc = $id_bai_hoc_moi_nhat + 1;
 
 	if (isset($_POST['saveBaiTap'])) {
-			$ten_file_de_bai = $_FILES['file_de_bai']['name'];
-			if ($ten_file_de_bai == "") {
-				$de_bai_path = $de_bai_path_LBH;
-				$flag3 = true;
-			}
-			else{
-				$path = strtolower(pathinfo($ten_file_de_bai, PATHINFO_EXTENSION));
-				if (!$path == "pdf") {
-					$kq.= "Chỉ cho phép định dạng pdf!<br>";
+			$ten_file_bai_nop = $_FILES['file_bai_nop']['name'];
+			if ($ten_file_bai_nop == "") {
+				$bai_nop_path = $bai_nop_path_DLNB;
+				if($bai_nop_path == ""){
 					$flag3 = false;
 				}
 				else{
-					$tmp_file = $_FILES['file_de_bai']['tmp_name'];
-					$SaveFile = move_uploaded_file($tmp_file, "../khoa_hoc/".$id_khoa_hoc_LBH."/Bai".$id_bai_hoc.".".$path);
-					$de_bai_path = "../khoa_hoc/".$id_khoa_hoc_LBH."/Bai".$id_bai_hoc.".".$path;
 					$flag3 = true;
 				}
+				
+			}
+			else{
+				$path = strtolower(pathinfo($ten_file_bai_nop, PATHINFO_EXTENSION));
+				$tmp_file = $_FILES['file_bai_nop']['tmp_name'];
+				if (!file_exists("../khoa_hoc/".$id_khoa_hoc_LBH."/".$id_bai_hoc."/bai_tap/".$username)) {
+    				mkdir("../khoa_hoc/".$id_khoa_hoc_LBH."/".$id_bai_hoc."/bai_tap/".$username , 0777, true);
+				}
+				$SaveFile = move_uploaded_file($tmp_file, "../khoa_hoc/".$id_khoa_hoc_LBH."/".$id_bai_hoc."/bai_tap/".$username."/".$username.".".$path);
+				$bai_nop_path = "../khoa_hoc/".$id_khoa_hoc_LBH."/".$id_bai_hoc."/bai_tap/".$username."/".$username.".".$path;
+				$flag3 = true;
 			}
 
 		if ($flag3 == true) {
-			$SQL = "INSERT INTO bai_hoc_da_nop (id_bai_hoc, username, thoi_gian_nop, bai_nop_path) VALUES('".$id_bai_hoc."', '".$username."', '".$thoi_gian_nop."', '".$bai_nop_path."')";
-			$SQL = "UPDATE bai_hoc_da_nop SET id_bai_hoc ='".$id_bai_hoc."', username ='".$username."', thoi_gian_nop ='".$thoi_gian_nop."', bai_nop_path ='".$bai_nop_path."' WHERE username =".$username;
-			echo "<br><div class = 'thongbao'>Cập nhật bài nộp thành công!</div>";
+			$thoi_gian_nop = date('Y-m-d H:i:s');
+			$SQL_insert = "INSERT INTO bai_hoc_da_nop (id_bai_hoc, username, thoi_gian_nop, bai_nop_path) VALUES('".$id_bai_hoc."', '".$username."', '".$thoi_gian_nop."', '".$bai_nop_path."')";
+			$SQL_update = "UPDATE bai_hoc_da_nop SET id_bai_hoc ='".$id_bai_hoc."', username ='".$username."', thoi_gian_nop ='".$thoi_gian_nop."', bai_nop_path ='".$bai_nop_path."' WHERE username ='".$username."'";
+			if($bai_nop_path_DLNB == ""){
+				$SQL = $SQL_insert;
+			}
+			else{
+				$SQL = $SQL_update;
+			}
+			if(!mysqli_query($connect, $SQL)){
+				echo "Lỗi cập nhật!";
+			}
+			else{
+				echo "<br><div class = 'thongbao'>Cập nhật bài nộp thành công!</div>";
+			}
+			;
+			
 		}
 		else{
 			echo "<div class='error'>".$kq."</div>";

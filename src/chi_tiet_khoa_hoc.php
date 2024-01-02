@@ -38,6 +38,7 @@
 
 	$video_type = "none";
 	$ten_bai_hoc = "Khóa học ".$ten_khoa_hoc;
+	$diem = -2;
 	if (isset($_GET['id_bai_hoc'])) {
 		$id_bai_hoc = $_GET['id_bai_hoc'];
 		$QueryTTBH = LayBaiHoc($connect, $id_khoa_hoc, $id_bai_hoc);
@@ -48,6 +49,13 @@
 	        $video_type = $list_bai_hoc['video_type'];
 			$video_path = $list_bai_hoc['Video_path'];
 			$de_bai_path = $list_bai_hoc['De_bai_path'];
+		}
+
+		$SQL = "SELECT diem FROM bai_hoc_da_nop WHERE id_bai_hoc = ".$id_bai_hoc." AND username = '".$username."'";
+		$Query = mysqli_query($connect, $SQL);
+		if(mysqli_num_rows($Query) > 0){
+			$DL = mysqli_fetch_assoc($Query);
+			$diem = $DL['diem'];
 		}
 	}
 	
@@ -171,14 +179,30 @@
 				</div>
 			</div>
 			<div style="width: 30%;height: 100%; display: inline-block;position: absolute;padding-left: 25px;">
-				<table id="users">
+				<table id="users" 
+					<?php 
+						if(!isset($_GET['id_bai_hoc'])){
+							echo "style='display: none;'";
+						}
+					?>>
 					<tr>
 						<th>Bài tập</th>
 						<th>Nộp bài</th>
+						<th>Điểm</th>
 					</tr>
 					<tr>
 						<td><a href="<?php echo $de_bai_path ?>" download>File bài tập</a></td>
 						<td><a href="nop_bai_tap.php?id_bai_hoc=<?php echo $id_bai_hoc ?>">Nộp tại đây</a></td>
+						<td>
+							<?php  
+								if($diem < 0){
+									echo "Chưa có điểm";
+								}
+								else{
+									echo $diem;
+								}
+							?>
+						</td>
 
 					</tr>
 

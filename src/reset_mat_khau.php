@@ -5,7 +5,7 @@
         header("location: DN.php");
     }
     else{
-        $username = $_SESSION['username'];
+        $username = $_SESSION['usernameRP'];
     }
     // $username = "user8";
 

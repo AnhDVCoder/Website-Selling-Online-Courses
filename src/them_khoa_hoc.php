@@ -1,4 +1,5 @@
 <?php
+	date_default_timezone_set('Asia/Ho_Chi_Minh');  
 	include '../connectdb.php';
 	include '../function.php';
 	session_start();
@@ -26,7 +27,7 @@ if (!isset($_SESSION['fullname'])) {
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Thêm bài học</title>
+	<title>Thêm khóa học</title>
 
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 	<link rel="stylesheet" href="../css/font-awesome-4.7.0/css/font-awesome.css">
@@ -82,6 +83,11 @@ if (!isset($_SESSION['fullname'])) {
 			  <input type="text" class="form-control" name="ten_tac_gia" value='<?php echo $fullname ?>'>
 			</div>
 
+			<div class="mb-3">
+			  <label for="ten_bai_tap" class="form-label">Giá khóa học</label>
+			  <input type="number" class="form-control" name="gia" placeholder="Nhập giá khóa học" min="0" value="0">
+			</div>
+
 
 			<div class="mb-3">
 			  <label for="thumbnail" class="form-label">Thumbnail</label>
@@ -116,7 +122,8 @@ if (!isset($_SESSION['fullname'])) {
 			</div>
 			<div class="mb-3">
 			  <label for="mo_ta" class="form-label">Mô tả</label>
-			  <textarea id="mo_ta_text" class="form-control" name="mo_ta" rows="5" cols="50"></textarea>
+			  <!-- <textarea id="mo_ta_text" class="form-control" name="mo_ta" rows="5" cols="50"></textarea> -->
+			  <textarea id="editor" name="editor"></textarea>
 			</div>
 
 
@@ -148,6 +155,15 @@ if (!isset($_SESSION['fullname'])) {
 			$flag2 = true;
 		}
 
+		if ($_POST['gia'] == NULL) {
+			$kq.= "- Bạn chưa nhập giá khóa học!<br>";
+			$flag5 = false;
+		}
+		else{
+			$gia = $_POST['gia'];
+			$flag5 = true;
+		}
+
 		// if ($_POST['tags'] == "") {
 		// 		$tags = $_POST['tags'];
 		// }
@@ -169,9 +185,9 @@ if (!isset($_SESSION['fullname'])) {
 		}
 		
 
-		$mo_ta = $_POST['mo_ta'];
-		if($_POST['mo_ta'] != ""){
-			$mo_ta = ltrim(rtrim($_POST['mo_ta'], " "), " ");
+		$mo_ta = $_POST['editor'];
+		if($_POST['editor'] != ""){
+			$mo_ta = ltrim(rtrim($_POST['editor'], " "), " ");
 		}
 		
 
@@ -198,9 +214,10 @@ if (!isset($_SESSION['fullname'])) {
 			}
 		}	
 
-		if ($flag1 == true && $flag2 == true && $flag3 == true) {
+		if ($flag1 == true && $flag2 == true && $flag3 == true && $flag5 == true) {
+			$dtime = date('Y-m-d H:i:s');
 			$id_khoa_hoc = $id_khoa_hoc_moi_nhat + 1;
-			insertKhoa_hoc($connect, $ten_khoa_hoc, $ten_tac_gia, $thumbnail_path, $mo_ta);
+			insertKhoa_hoc($connect, $ten_khoa_hoc, $ten_tac_gia, $thumbnail_path, $mo_ta, $dtime, $gia);
 			if($flag4 == true){
 				foreach ($categories as $value) {
 				$Query = mysqli_query($connect, "INSERT INTO khoa_hoc_phan_loai (ID_khoa_hoc, ID_phan_loai) VALUES(".$id_khoa_hoc.", ".$value.")");
@@ -222,6 +239,20 @@ if (!isset($_SESSION['fullname'])) {
 		</form>
 		</div>
 	</main>
+			<script src="ckeditor5-build-classic/ckeditor.js"></script>
+
+<script>
+	ClassicEditor
+		.create( document.querySelector( '#editor' ), {
+			// toolbar: [ 'heading', '|', 'bold', 'italic', 'link' ]
+		} )
+		.then( editor => {
+			window.editor = editor;
+		} )
+		.catch( err => {
+			console.error( err.stack );
+		} );
+</script>
 	<?php include "footer.php" ?>
 </body>
 

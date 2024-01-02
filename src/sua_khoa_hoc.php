@@ -24,13 +24,13 @@
 
 	
 
-	$SQL = "SELECT ten_khoa_hoc, ten_tac_gia, thumbnail, tags, mo_ta FROM khoa_hoc WHERE id_khoa_hoc =".$id_khoa_hoc;
+	$SQL = "SELECT * FROM khoa_hoc WHERE id_khoa_hoc =".$id_khoa_hoc;
 	$list_khoa_hoc = mysqli_query($connect, $SQL);
 	$data = mysqli_fetch_assoc($list_khoa_hoc);
 	$ten_khoa_hoc = $data['ten_khoa_hoc'];
 	$ten_tac_gia = $data['ten_tac_gia'];
 	$thumbnail_path = $data['thumbnail'];
-	$tags = $data['tags'];
+	$gia = $data['gia'];
 	$mo_ta = $data['mo_ta'];
 
 ?>
@@ -90,6 +90,11 @@
 			  <input type="text" class="form-control" name="ten_tac_gia" value='<?php echo $ten_tac_gia ?>'>
 			</div>
 
+			<div class="mb-3">
+			  <label for="ten_bai_tap" class="form-label">Giá khóa học</label>
+			  <input type="number" class="form-control" name="gia" placeholder="Nhập giá khóa học" min="0" value="<?php echo $gia ?>">
+			</div>
+
 
 			<div class="mb-3">
 			  <label for="thumbnail" class="form-label">Thumbnail</label>
@@ -141,7 +146,7 @@
 
 			<div class="mb-3">
 			  <label for="mo_ta" class="form-label">Mô tả</label>
-			  <textarea id="mo_ta_text" class="form-control" name="mo_ta" rows="5" cols="50"><?php echo $mo_ta ?></textarea>
+			  <textarea id="editor" name="editor"><?php echo $mo_ta ?></textarea>
 			</div>
 
 			<input type="submit" class="btn btn-primary" name="save" value="Lưu">
@@ -200,19 +205,18 @@
 
 		$categories = $_POST['phan_loai'];
 
-		$mo_ta = $_POST['mo_ta'];
-		if($_POST['mo_ta'] != ""){
-			$mo_ta = ltrim(rtrim($_POST['mo_ta'], " "), " ");
+		$mo_ta = $_POST['editor'];
+		if($_POST['editor'] != ""){
+			$mo_ta = ltrim(rtrim($_POST['editor'], " "), " ");
 		}
 
-		$tags = $_POST['tags'];
-		if ($tags != "") {
-			$tags = "";
-			$temp = explode(",", $_POST['tags']);
-			for($i = 0; $i < count($temp); $i++){
-				$temp[$i] = ltrim(rtrim($temp[$i], " "), " ");
-				$tags .= $temp[$i].", ";
-			}
+		if ($_POST['gia'] == NULL) {
+			$kq.= "- Bạn chưa nhập giá khóa học!<br>";
+			$flag5 = false;
+		}
+		else{
+			$gia = $_POST['gia'];
+			$flag5 = true;
 		}
 
 		
@@ -237,8 +241,8 @@
 			}
 		}
 
-		if ($flag1 == true && $flag2 == true && $flag3 == true) {
-			updateKhoa_hoc($connect, $ten_khoa_hoc, $ten_tac_gia, $thumbnail_path, $id_khoa_hoc, $tags, $mo_ta);
+		if ($flag1 == true && $flag2 == true && $flag3 == true && $flag5 == true) {
+			updateKhoa_hoc($connect, $ten_khoa_hoc, $ten_tac_gia, $thumbnail_path, $id_khoa_hoc, $mo_ta, $gia);
 			$SQL = "DELETE FROM khoa_hoc_phan_loai WHERE id_khoa_hoc =".$id_khoa_hoc;
 			mysqli_query($connect, $SQL);
 			foreach ($categories as $value) {
@@ -256,6 +260,20 @@
 		</form>
 		</div>
 	</main>
+		<script src="ckeditor5-build-classic/ckeditor.js"></script>
+
+<script>
+	ClassicEditor
+		.create( document.querySelector( '#editor' ), {
+			// toolbar: [ 'heading', '|', 'bold', 'italic', 'link' ]
+		} )
+		.then( editor => {
+			window.editor = editor;
+		} )
+		.catch( err => {
+			console.error( err.stack );
+		} );
+</script>
 	<?php include "footer.php" ?>
 </body>
 <script src="them_khoa_hoc.js"></script>

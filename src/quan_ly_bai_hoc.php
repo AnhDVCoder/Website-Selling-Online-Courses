@@ -49,6 +49,7 @@
 	    <th>STT</th>
 	    <th>Mã bài học</th>
 	    <th>Tên bài học</th>
+	    <th>Chức năng</th>
 	    <th>Chỉnh sửa</th>
 	</tr>
 
@@ -70,7 +71,7 @@
                                 
 		    				<td>".$listKH['Ten_bai_hoc']."</td>
                             
-		    				
+		    				<td><a class='btn-ql' href='kiem_tra_bai_tap.php?id_bai_hoc=".$listKH['ID_bai_hoc']."'>Chấm điểm</a></td>
 		    				<form method='POST' action=''>
 		    				
 		    				<td>

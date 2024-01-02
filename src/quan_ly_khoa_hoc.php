@@ -47,6 +47,7 @@
   	<tr>
 	    <th>STT</th>
 	    <th>Tên khóa học</th>
+	    <th>Thời gian tạo</th>
 	    <th>Người hướng dẫn</th>
 	    <th>Giá tiền</th>
 	    <th>Số bài học</th>
@@ -69,8 +70,9 @@
 
                                 
 		    				<td>".$listKH['ten_khoa_hoc']."</td>
+		    				<td>".$listKH['ngay_tao']."</td>
 		    				<td>".$listKH['ten_tac_gia']."</td>
-                            <td>".$listKH['gia']."</td>
+                            <td>".number_format($listKH['gia'])."</td>
                             <td><a class='btn-ql' href='quan_ly_bai_hoc.php?id_khoa_hoc=".$listKH['id_khoa_hoc']."'>";
                             $SQL = '
                             	SELECT COUNT(ID_bai_hoc) AS COUNT
