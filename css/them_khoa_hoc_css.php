@@ -31,6 +31,7 @@
 .dropdown-check-list .anchor:active:after {
   right: 8px;
   top: 21%;
+  visiblity: visible!important;
 }
 
 .dropdown-check-list ul.items {
