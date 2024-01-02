@@ -25,13 +25,19 @@ CREATE TABLE IF NOT EXISTS `bai_hoc_da_nop` (
   `username` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
   `thoi_gian_nop` datetime NOT NULL,
   `bai_nop_path` text CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci,
+  `diem` int DEFAULT '-1',
   KEY `FK_bai_hoc_da_nop_list_bai_hoc` (`id_bai_hoc`),
   KEY `FK_bai_hoc_da_nop_information` (`username`),
   CONSTRAINT `FK_bai_hoc_da_nop_information` FOREIGN KEY (`username`) REFERENCES `information` (`username`),
   CONSTRAINT `FK_bai_hoc_da_nop_list_bai_hoc` FOREIGN KEY (`id_bai_hoc`) REFERENCES `list_bai_hoc` (`ID_bai_hoc`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Dumping data for table cuoikyweb.bai_hoc_da_nop: ~0 rows (approximately)
+-- Dumping data for table cuoikyweb.bai_hoc_da_nop: ~1 rows (approximately)
+INSERT INTO `bai_hoc_da_nop` (`id_bai_hoc`, `username`, `thoi_gian_nop`, `bai_nop_path`, `diem`) VALUES
+	(14, 'admin', '2024-01-03 03:31:25', '../khoa_hoc/2/14/bai_tap/admin/admin.pdf', 7),
+	(14, 'user8', '2024-01-03 05:07:45', '../khoa_hoc/2/14/bai_tap/user8/user8.sql', 8),
+	(16, 'user8', '2024-01-03 05:08:05', '../khoa_hoc/2/16/bai_tap/user8/user8.jar', -1),
+	(25, 'userG', '2024-01-03 05:17:14', '../khoa_hoc/4/25/bai_tap/userG/userG.exe', 10);
 
 -- Dumping structure for table cuoikyweb.ho_tro
 CREATE TABLE IF NOT EXISTS `ho_tro` (
@@ -69,7 +75,7 @@ CREATE TABLE IF NOT EXISTS `information` (
 -- Dumping data for table cuoikyweb.information: ~22 rows (approximately)
 INSERT INTO `information` (`username`, `password`, `fullname`, `email`, `gender`, `avatar`, `permission`) VALUES
 	('admin', '12345678', 'Quản trị', 'anhdv181@icloud.com', 'Nam', '../images/avatars/default.jpg', 2),
-	('AnhDV181', '12345678', 'Doãn Việt Anh', 'vanhhd2002@gmail.com', 'Nam', '../images/avatars/AnhDV181.png', 2),
+	('AnhDV181', '11118888', 'Doãn Việt Anh', 'vanhhd2002@gmail.com', 'Nam', '../images/avatars/AnhDV181.png', 2),
 	('user18', '12345678', 'Người dùng 18', 'user18@gmail.com', 'Nam', '../images/avatars/user18.png', 1),
 	('user19', '12345678', 'Người dùng 19', 'user19@gmail.com', 'Nam', '../images/avatars/default.jpg', 1),
 	('user2', '12345678', 'Người dùng 2', 'user2@gmail.com', 'Nam', '../images/avatars/default.jpg', 1),
@@ -90,7 +96,12 @@ INSERT INTO `information` (`username`, `password`, `fullname`, `email`, `gender`
 	('user6', '12345678', 'Người dùng 6', 'user6@gmail.com', 'Nam', '../images/avatars/default.jpg', 1),
 	('user7', '87654321', 'Người dùng 7', '123mimac191@gmail.com', 'Nam', '../images/avatars/default.jpg', 1),
 	('user8', '22223333', 'Nguyễn Văn 10', 'user181@gmail.com', 'Nữ', '../images/avatars/user8.png', 1),
-	('user9', '12345678', 'Người dùng 9', 'trinh5420@gmail.com', 'Nam', '../images/avatars/default.jpg', 1);
+	('user9', '12345678', 'Người dùng 9', 'trinh5420@gmail.com', 'Nam', '../images/avatars/default.jpg', 1),
+	('userD', '12345678', 'Nguyễn Văn D', 'userD@gmail.com', 'Nam', '../images/avatars/default.jpg', 0),
+	('userE', '12345678', 'Vũ Thị E', 'userE@gmail.com', 'Nam', '../images/avatars/default.jpg', 0),
+	('userF', '12345678', 'Vũ Thị F', 'userF@gmail.com', 'Nu', '../images/avatars/default.jpg', 0),
+	('userG', '12345678', 'Nguyễn Văn G', 'userG@gmail.com', 'Nam', '../images/avatars/default.jpg', 0),
+	('userH', '12345678', 'Nguyễn Văn H', 'userH@gmail.com', 'Nam', '../images/avatars/default.jpg', 0);
 
 -- Dumping structure for table cuoikyweb.khoa_hoc
 CREATE TABLE IF NOT EXISTS `khoa_hoc` (
@@ -104,15 +115,19 @@ CREATE TABLE IF NOT EXISTS `khoa_hoc` (
   `ngay_tao` date NOT NULL DEFAULT '2023-01-01',
   `gia` double NOT NULL DEFAULT '0',
   PRIMARY KEY (`id_khoa_hoc`)
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
--- Dumping data for table cuoikyweb.khoa_hoc: ~5 rows (approximately)
+-- Dumping data for table cuoikyweb.khoa_hoc: ~8 rows (approximately)
 INSERT INTO `khoa_hoc` (`id_khoa_hoc`, `ten_khoa_hoc`, `ten_tac_gia`, `luot_xem`, `thumbnail`, `tags`, `mo_ta`, `ngay_tao`, `gia`) VALUES
-	(2, 'Lập trình JavaScript cơ bản', 'AnhDV', 160, '../images/thumbnail/2.jpg', '', 'Đây là khóa học lập trình JS cơ bản, very cơ bản, không học được thì chịu', '2023-01-01', 800000),
-	(3, 'Lập trình JavaScript nâng cao', 'Việt Hưng', 131, '../images/thumbnail/3.jpg', '', 'Đây là khóa học lập trình JS cơ bản, very cơ bản, không học được thì chịu', '2023-01-01', 1200000),
-	(4, 'Lập trình C++ cơ bản', 'Khang An', 67, '../images/thumbnail/4.jpg', '', '', '2023-01-01', 600000),
-	(6, 'MySQL Cơ bản', 'Vanh', 2, '../images/thumbnail/6.jpg', '', '', '2023-01-01', 900000),
-	(29, 'khóa học 2', 'Doãn Việt Anh', 17, '../images/default.jpg', '', '', '2023-01-01', 0);
+	(2, 'Lập trình JavaScript cơ bản', 'AnhDV', 200, '../images/thumbnail/2.jpg', '', '<p><strong>Javascript</strong> chính là một ngôn ngữ lập trình web rất phổ biến ngày nay. Javascript được tích hợp đồng thời nhúng vào HTML để hỗ trợ cho website trở nên sống động hơn. Chúng cũng đóng vai trò tương tự như một phần của website, cho phép Client-side Script từ người dùng tương tự máy chủ (Nodejs) để tạo ra những website động.</p>', '2023-01-01', 8000000),
+	(3, 'Lập trình JavaScript nâng cao', 'Việt Hưng', 143, '../images/thumbnail/3.jpg', '', 'Đây là khóa học lập trình JS cơ bản, very cơ bản, không học được thì chịu', '2023-01-01', 1200000),
+	(4, 'Lập trình C++ cơ bản', 'Khang An', 93, '../images/thumbnail/4.jpg', '', '', '2023-01-01', 600000),
+	(6, 'MySQL Cơ bản', 'Vanh', 3, '../images/thumbnail/6.jpg', '', '', '2023-01-01', 900000),
+	(29, 'khóa học 2', 'Doãn Việt Anh', 17, '../images/default.jpg', '', '', '2023-01-01', 0),
+	(31, 'khóa học 5', 'Quản trị', 0, '../images/default.jpg', NULL, '', '2023-01-01', 0),
+	(32, 'khóa học 6', 'Quản trị', 1, '../images/default.jpg', NULL, '', '2023-01-01', 0),
+	(33, 'Khóa học 10', 'Quản trị', 0, '../images/default.jpg', NULL, '', '2024-01-03', 2000000),
+	(34, 'Khóa học 12', 'D Việt Anh', 0, '../images/default.jpg', NULL, '<p>Đây là demo tạo khóa học&nbsp;</p>', '2024-01-03', 1500000);
 
 -- Dumping structure for table cuoikyweb.khoa_hoc_da_mua
 CREATE TABLE IF NOT EXISTS `khoa_hoc_da_mua` (
@@ -128,7 +143,9 @@ CREATE TABLE IF NOT EXISTS `khoa_hoc_da_mua` (
 -- Dumping data for table cuoikyweb.khoa_hoc_da_mua: ~1 rows (approximately)
 INSERT INTO `khoa_hoc_da_mua` (`username`, `id_khoa_hoc`, `ngay_mua`) VALUES
 	('user8', 2, NULL),
-	('AnhDV181', 4, NULL);
+	('AnhDV181', 4, NULL),
+	('admin', 2, '2024-01-03'),
+	('userG', 4, '2024-01-03');
 
 -- Dumping structure for table cuoikyweb.khoa_hoc_phan_loai
 CREATE TABLE IF NOT EXISTS `khoa_hoc_phan_loai` (
@@ -145,8 +162,20 @@ INSERT INTO `khoa_hoc_phan_loai` (`ID_khoa_hoc`, `ID_phan_loai`) VALUES
 	(4, 8),
 	(3, 9),
 	(6, 8),
+	(29, 9),
+	(32, 1),
+	(32, 7),
+	(32, 9),
+	(32, 10),
+	(33, 1),
+	(33, 6),
+	(33, 7),
+	(2, 1),
 	(2, 8),
-	(29, 9);
+	(2, 9),
+	(34, 6),
+	(34, 7),
+	(34, 10);
 
 -- Dumping structure for table cuoikyweb.list_bai_hoc
 CREATE TABLE IF NOT EXISTS `list_bai_hoc` (
@@ -160,9 +189,9 @@ CREATE TABLE IF NOT EXISTS `list_bai_hoc` (
   PRIMARY KEY (`ID_bai_hoc`),
   KEY `ID_khoa_hoc` (`ID_khoa_hoc`),
   CONSTRAINT `list_bai_hoc_ibfk_1` FOREIGN KEY (`ID_khoa_hoc`) REFERENCES `khoa_hoc` (`id_khoa_hoc`)
-) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
--- Dumping data for table cuoikyweb.list_bai_hoc: ~19 rows (approximately)
+-- Dumping data for table cuoikyweb.list_bai_hoc: ~23 rows (approximately)
 INSERT INTO `list_bai_hoc` (`ID_khoa_hoc`, `ID_bai_hoc`, `Ten_bai_hoc`, `video_type`, `Video_path`, `De_bai_path`, `noi_dung`) VALUES
 	(2, 14, 'Cài đặt môi trường', 'link', 'https://www.youtube.com/embed/efI98nT8Ffo', '../khoa_hoc/2/Bai1.pdf', NULL),
 	(2, 16, 'Sử dụng JavaScript với HTML', 'link', 'https://www.youtube.com/embed/W0vEUmyvthQ', '../khoa_hoc/2/Bai15.pdf', NULL),
@@ -182,7 +211,11 @@ INSERT INTO `list_bai_hoc` (`ID_khoa_hoc`, `ID_bai_hoc`, `Ten_bai_hoc`, `video_t
 	(6, 38, 'CSDL quan hệ và Hệ quản trị CSDL', 'link', 'https://www.youtube.com/embed/InUDwfsGG4A', '../khoa_hoc/6/Bai38.pdf', NULL),
 	(6, 39, 'Tạo vs Xóa Database bằng câu truy vấn SQL', 'link', 'https://www.youtube.com/embed/DGXCp-iajEg', '../khoa_hoc/6/Bai39.pdf', NULL),
 	(6, 40, 'Tạo và xóa bảng bằng câu truy vấn SQL', 'link', 'https://www.youtube.com/embed/l2ODvlsKu5Q', '../khoa_hoc/6/Bai40.exe', NULL),
-	(6, 41, 'Tạo và xóa bảng bằng câu truy vấn SQL', 'link', 'https://www.youtube.com/embed/l2ODvlsKu5Q', '../khoa_hoc/6/Bai41.pdf', NULL);
+	(6, 41, 'Tạo và xóa bảng bằng câu truy vấn SQL', 'link', 'https://www.youtube.com/embed/l2ODvlsKu5Q', '../khoa_hoc/6/Bai41.pdf', NULL),
+	(29, 47, 'bài 1', 'link', 'https://www.youtube.com/embed/lukT_WB5IB0', '../khoa_hoc/29/Bai1.pdf', '<p>3123123123323</p>'),
+	(29, 48, 'bài 10', 'none', 'none', '../khoa_hoc/29/Bai48.pdf', ''),
+	(29, 49, 'Bài 9', 'none', 'none', '../khoa_hoc/29/Bai49.pdf', ''),
+	(29, 50, 'bài 8', 'none', 'none', '../khoa_hoc/29/Bai50.pdf', '<p>12313sadasdasdasd</p>');
 
 -- Dumping structure for table cuoikyweb.list_phan_loai
 CREATE TABLE IF NOT EXISTS `list_phan_loai` (
@@ -230,7 +263,9 @@ INSERT INTO `quen_mat_khau` (`email`, `username`, `code`, `dtime_start`, `dtime_
 	('123mimac191@gmail.com', 'user7', 920026, '2023-12-31 15:09:14', '2023-12-31 15:19:14', 0),
 	('123mimac191@gmail.com', 'user7', 340486, '2023-12-31 15:11:42', '2023-12-31 15:21:42', 0),
 	('123mimac191@gmail.com', 'user7', 685165, '2023-12-31 15:17:09', '2023-12-31 15:20:00', 0),
-	('123mimac191@gmail.com', 'user7', 113804, '2023-12-31 15:20:10', '2023-12-31 15:30:10', 0);
+	('123mimac191@gmail.com', 'user7', 113804, '2023-12-31 15:20:10', '2023-12-31 15:30:10', 0),
+	('vanhhd2002@gmail.com', 'AnhDV181', 124985, '2024-01-03 02:58:10', '2024-01-03 03:08:10', 0),
+	('vanhhd2002@gmail.com', 'AnhDV181', 704610, '2024-01-03 03:04:13', '2024-01-03 03:14:13', 1);
 
 -- Dumping structure for table cuoikyweb.save_bh
 CREATE TABLE IF NOT EXISTS `save_bh` (
