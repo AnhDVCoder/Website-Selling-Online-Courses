@@ -17,9 +17,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-![Alt text](images/demo-bot-place.gif)
-
-Selling
+As a student of the Department of Information Technology at Hanoi University of Education, course K70, this page is the final paper of the Software Technology Laboratory subject.
 
 ## Screenshot User
 1. Courses page
