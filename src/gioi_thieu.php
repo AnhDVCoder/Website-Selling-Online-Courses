@@ -46,58 +46,6 @@
     	<a href="https://twitter.com/AnhDVX"><i class="fa fa-twitter" aria-hidden="true" style="color: #1d9bf0;" id="icon"></i></i></a>
     	<a href=""><i class="fa fa-telegram" aria-hidden="true" style="color: #229fdc;" id="icon"></i></i></a>
     </div>
-    <div class="user main-user2">
-    	<img src="../images/avatars/default_avatar.png" id="image" width="100px"><br>
-    	<br>
-    	<div></i>Trịnh Đức Anh</div>
-    	<div>Khoa Công nghệ thông tin</div>
-    	<br>
-    	<div>Liên hệ</div>
-    	<br>
-    	<a href="https://www.facebook.com/ducc.anhh.69"><i class="fa fa-facebook-official" aria-hidden="true" id="icon" style="color: #3f5793;"></i></a>
-    	<a href=""><i class="fa fa-instagram" aria-hidden="true" style="color: pink;" id="icon"></i></a>
-    	<a href=""><i class="fa fa-twitter" aria-hidden="true" style="color: #1d9bf0;" id="icon"></i></i></a>
-    	<a href=""><i class="fa fa-telegram" aria-hidden="true" style="color: #229fdc;" id="icon"></i></i></a>
-    </div>
-    <div class="user main-user2">
-    	<img src="../images/avatars/default_avatar.png" id="image" width="100px"><br>
-    	<br>
-    	<div></i>Nguyễn Việt Hưng</div>
-    	<div>Khoa Công nghệ thông tin</div>
-    	<br>
-    	<div>Liên hệ</div>
-    	<br>
-    	<a href="https://www.facebook.com/Okeniria"><i class="fa fa-facebook-official" aria-hidden="true" id="icon" style="color: #3f5793;"></i></a>
-    	<a href=""><i class="fa fa-instagram" aria-hidden="true" style="color: pink;" id="icon"></i></a>
-    	<a href=""><i class="fa fa-twitter" aria-hidden="true" style="color: #1d9bf0;" id="icon"></i></i></a>
-    	<a href=""><i class="fa fa-telegram" aria-hidden="true" style="color: #229fdc;" id="icon"></i></i></a>
-    </div>
-    <div class="user main-user2">
-    	<img src="../images/avatars/default_avatar.png" id="image" width="100px"><br>
-    	<br>
-    	<div></i>Nguyễn Minh Đức</div>
-    	<div>Khoa Công nghệ thông tin</div>
-    	<br>
-    	<div>Liên hệ</div>
-    	<br>
-    	<a href="https://www.facebook.com/ducnm28"><i class="fa fa-facebook-official" aria-hidden="true" id="icon" style="color: #3f5793;"></i></a>
-    	<a href=""><i class="fa fa-instagram" aria-hidden="true" style="color: pink;" id="icon"></i></a>
-    	<a href=""><i class="fa fa-twitter" aria-hidden="true" style="color: #1d9bf0;" id="icon"></i></i></a>
-    	<a href=""><i class="fa fa-telegram" aria-hidden="true" style="color: #229fdc;" id="icon"></i></i></a>
-    </div>
-    <div class="user main-user2">
-    	<img src="../images/avatars/default_avatar.png" id="image" width="100px"><br>
-    	<br>
-    	<div></i>Vũ Chí Dũng</div>
-    	<div>Khoa Công nghệ thông tin</div>
-    	<br>
-    	<div>Liên hệ</div>
-    	<br>
-    	<a href="https://www.facebook.com/nie.life.158"><i class="fa fa-facebook-official" aria-hidden="true" id="icon" style="color: #3f5793;"></i></a>
-    	<a href=""><i class="fa fa-instagram" aria-hidden="true" style="color: pink;" id="icon"></i></a>
-    	<a href=""><i class="fa fa-twitter" aria-hidden="true" style="color: #1d9bf0;" id="icon"></i></i></a>
-    	<a href=""><i class="fa fa-telegram" aria-hidden="true" style="color: #229fdc;" id="icon"></i></i></a>
-    </div>
     </div>
     <br>
 	<!--------------------------------------------------------------->
