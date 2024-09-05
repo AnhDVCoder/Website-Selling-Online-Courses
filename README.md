@@ -24,11 +24,11 @@
 <div align="center">
   <a href="https://github.com/AnhDVCoder/vn-in-mc"></a>
 
-<h3 align="center">VN-in-MC</h3>
+<h3 align="center">Edubit</h3>
 
   <p align="center">
-    Create 2D Google Map of Vietnam in Minecraft 
-    <br />
+    Sell online courses.
+    <br/>
   </p>
 </div>
 
@@ -38,11 +38,36 @@
 
 ![Alt text](images/demo-bot-place.gif)
 
-This project aims to create a playground for the Minecraft community to rebuild the entire Vietnam into Minecraft.
+Selling
 
-## Scan Google map
-Scan Google map using Nodejs Puppeteer library
-![Alt text](images/demo-scan-gg.gif)
+## Screenshot User
+1. Courses page
+![Alt text](images/demo/courses.png)
+
+2. Login / Register
+![Alt text](images/demo/login.png)
+![Alt text](images/demo/register.png)
+
+3. Search
+![Alt text](images/demo/search.png)
+
+4. Buy courses
+![Alt text](images/demo/buy-courses.png)
+
+5. My Courses
+![Alt text](images/demo/bought-courses.png)
+
+## Screenshot Admin
+1. Manage courses
+![Alt text](images/demo/AD_courses.png)
+
+1.1. Add courses
+![Alt text](images/demo/AD_add-courses.png)
+
+1.2. Edit courses
+![Alt text](images/demo/AD_edit-courses.png)
+
+
 
 ## Convert into Schematic
 Convert into Litematic file using [stable-diffusion-webui](https://github.com/AUTOMATIC1111/stable-diffusion-webui) via extention [mine-diffusion](https://github.com/fropych/mine-diffusion)
